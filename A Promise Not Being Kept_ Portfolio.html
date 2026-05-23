@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<!-- saved from url=(0070)file:///C:/Users/amett/Downloads/APromiseNotBeingKept-Portfolio_1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Promise Not Being Kept: Portfolio</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; font-size: 11pt; color: #2c2c2c; background: #fff; line-height: 1.7; }
+
+  .page { max-width: 820px; margin: 0 auto; padding: 60px 64px; }
+
+  /* COVER */
+  .cover { min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 80px 64px; background: #1B3A5C; }
+  .cover-tag { font-family: Arial, sans-serif; font-size: 9pt; color: rgba(255,255,255,0.45); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 80px; }
+  .cover-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .cover-label { font-family: Arial, sans-serif; font-size: 9pt; color: #7EC8C8; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+  .cover-title { font-size: 48pt; font-weight: 700; color: #ffffff; line-height: 1.05; margin-bottom: 24px; }
+  .cover-sub { font-family: Arial, sans-serif; font-size: 12pt; color: rgba(255,255,255,0.65); max-width: 520px; line-height: 1.6; border-left: 3px solid #2A7F7F; padding-left: 20px; margin-bottom: 60px; }
+  .cover-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,0.1); margin-top: 20px; }
+  .cover-stat { padding: 18px 14px; background: rgba(255,255,255,0.05); display: flex; flex-direction: column; justify-content: flex-start; }
+  .cover-stat .val { font-family: Arial, sans-serif; font-size: 22pt; font-weight: 700; color: #7EC8C8; line-height: 1; }
+  .cover-stat .lbl { font-family: Arial, sans-serif; font-size: 8pt; color: rgba(255,255,255,0.5); margin-top: 6px; line-height: 1.4; }
+  .cover-footer { margin-top: 48px; font-family: Arial, sans-serif; font-size: 9pt; color: rgba(255,255,255,0.35); display: flex; justify-content: space-between; }
+
+  /* PAGE HEADER */
+  .page-header { font-family: Arial, sans-serif; font-size: 8pt; color: #bbb; letter-spacing: 1px; text-transform: uppercase; padding-bottom: 12px; border-bottom: 1px solid #e8e8e8; margin-bottom: 40px; display: flex; justify-content: space-between; }
+
+  /* ANALYST NOTE */
+  .analyst-note { background: #F4F9F9; border-left: 4px solid #2A7F7F; padding: 28px 32px; margin: 0 0 40px; }
+  .analyst-note .an-label { font-family: Arial, sans-serif; font-size: 8.5pt; font-weight: 700; color: #2A7F7F; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+  .analyst-note p { font-size: 10.5pt; color: #444; margin-bottom: 10px; }
+  .analyst-note p:last-child { margin-bottom: 0; }
+
+  /* SECTION HEADINGS */
+  h2.section-title { font-family: Arial, sans-serif; font-size: 12pt; font-weight: 700; color: #1B3A5C; margin: 44px 0 8px; padding-bottom: 8px; border-bottom: 2px solid #2A7F7F; }
+  h2.section-title .num { color: #2A7F7F; margin-right: 8px; }
+  h3.sub-title { font-family: Arial, sans-serif; font-size: 10.5pt; font-weight: 700; color: #1B3A5C; margin: 28px 0 8px; }
+
+  p { margin-bottom: 13px; }
+
+  /* CALLOUTS */
+  .callout { border-left: 4px solid #2A7F7F; background: #EEF6F6; padding: 18px 22px; margin: 22px 0; }
+  .callout.critical { border-left-color: #B03A2E; background: #FDF2F1; }
+  .callout.dark { background: #1B3A5C; border-left-color: #7EC8C8; }
+  .callout-label { font-family: Arial, sans-serif; font-size: 8.5pt; font-weight: 700; color: #2A7F7F; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .callout.critical .callout-label { color: #B03A2E; }
+  .callout.dark .callout-label { color: #7EC8C8; }
+  .callout p { font-size: 10.5pt; margin: 0; }
+  .callout.dark p { color: rgba(255,255,255,0.85); }
+
+  .note-box { background: #f7f7f7; border: 1px solid #ddd; padding: 13px 18px; margin: 14px 0; font-size: 9.5pt; color: #666; font-style: italic; line-height: 1.6; }
+
+  /* METHOD STEPS */
+  .method-steps { margin: 20px 0; }
+  .method-step { display: flex; gap: 18px; padding: 14px 0; border-bottom: 1px solid #eee; align-items: flex-start; }
+  .method-step:last-child { border-bottom: none; }
+  .method-icon { font-family: Arial, sans-serif; font-size: 11pt; font-weight: 700; color: #2A7F7F; width: 28px; flex-shrink: 0; padding-top: 2px; }
+  .method-text { font-size: 10.5pt; }
+  .method-text strong { font-family: Arial, sans-serif; color: #1B3A5C; }
+
+  /* CHARTS */
+  .chart-wrap { margin: 28px 0; }
+  .chart-title { font-family: Arial, sans-serif; font-size: 9pt; font-weight: 700; color: #1B3A5C; margin-bottom: 14px; text-align: center; letter-spacing: 0.5px; text-transform: uppercase; }
+  .chart-source { font-family: Arial, sans-serif; font-size: 8pt; color: #aaa; text-align: center; margin-top: 8px; }
+
+  .bar-chart { display: flex; flex-direction: column; gap: 12px; }
+  .bar-row { display: flex; align-items: center; gap: 14px; }
+  .bar-label { font-family: Arial, sans-serif; font-size: 9.5pt; color: #555; width: 160px; text-align: right; flex-shrink: 0; }
+  .bar-track { flex: 1; background: #eee; height: 30px; border-radius: 2px; overflow: visible; position: relative; }
+  .bar-fill { height: 100%; display: flex; align-items: center; padding-left: 10px; min-width: 60px; }
+  .bar-fill .bv { font-family: Arial, sans-serif; font-size: 8.5pt; font-weight: 700; color: white; white-space: nowrap; overflow: visible; }
+  .bar-fill.teal { background: #2A7F7F; }
+  .bar-fill.orange { background: #C0621A; }
+  .bar-fill.navy { background: #1B3A5C; }
+  .bar-fill.red { background: #B03A2E; }
+
+  /* STAT ROW */
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #ddd; margin: 24px 0; border: 1px solid #ddd; overflow: hidden; }
+  .stat-cell { background: white; padding: 20px 14px; text-align: center; }
+  .stat-cell .sv { font-family: Arial, sans-serif; font-size: 22pt; font-weight: 700; color: #2A7F7F; line-height: 1; }
+  .stat-cell .sl { font-family: Arial, sans-serif; font-size: 8.5pt; color: #777; margin-top: 6px; line-height: 1.4; }
+
+  /* DSM COMPARISON */
+  .dsm-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .dsm-box { padding: 22px; text-align: center; }
+  .dsm-box.old { background: #FDF2F1; border: 1px solid #B03A2E; }
+  .dsm-box.new { background: #EEF6F6; border: 1px solid #2A7F7F; }
+  .dsm-box .dsm-tag { font-family: Arial, sans-serif; font-size: 8pt; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+  .dsm-box.old .dsm-tag { color: #B03A2E; }
+  .dsm-box.new .dsm-tag { color: #2A7F7F; }
+  .dsm-box .dsm-val { font-family: Arial, sans-serif; font-size: 28pt; font-weight: 700; line-height: 1; }
+  .dsm-box.old .dsm-val { color: #B03A2E; }
+  .dsm-box.new .dsm-val { color: #2A7F7F; }
+  .dsm-box .dsm-sub { font-family: Arial, sans-serif; font-size: 8.5pt; color: #888; margin-top: 6px; }
+
+  /* ACCESS BAR */
+  .access-bar-wrap { margin: 16px 0 4px; }
+  .access-bar { display: flex; height: 60px; width: 100%; }
+  .ab-seg { display: flex; align-items: center; justify-content: center; flex-direction: column; }
+  .ab-seg .abv { font-family: Arial, sans-serif; font-size: 16pt; font-weight: 700; color: white; line-height: 1; }
+  .ab-seg .abl { font-family: Arial, sans-serif; font-size: 7.5pt; color: rgba(255,255,255,0.8); margin-top: 2px; }
+
+  /* COST RATIO */
+  .cost-ratio { display: grid; grid-template-columns: 1fr 110px 1fr; gap: 0; margin: 28px 0; align-items: stretch; border: 1px solid #ddd; overflow: hidden; }
+  .cr-box { padding: 24px 20px; text-align: center; }
+  .cr-box.left { background: #F4F9F9; }
+  .cr-box.right { background: #1B3A5C; }
+  .cr-val { font-family: Arial, sans-serif; font-size: 20pt; font-weight: 700; color: #2A7F7F; line-height: 1; }
+  .cr-box.right .cr-val { color: #7EC8C8; }
+  .cr-lbl { font-family: Arial, sans-serif; font-size: 9pt; color: #666; margin-top: 7px; line-height: 1.4; }
+  .cr-box.right .cr-lbl { color: rgba(255,255,255,0.55); }
+  .cr-mid { text-align: center; }
+  .cr-ratio { font-family: Arial, sans-serif; font-size: 18pt; font-weight: 700; color: #C0621A; line-height: 1; }
+  .cr-mid-lbl { font-family: Arial, sans-serif; font-size: 8pt; color: #999; }
+
+  /* GAP TABLE */
+  .gap-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 10pt; }
+  .gap-table th { font-family: Arial, sans-serif; font-size: 8.5pt; font-weight: 700; color: white; background: #1B3A5C; padding: 10px 14px; text-align: left; letter-spacing: 0.5px; text-transform: uppercase; }
+  .gap-table td { padding: 10px 14px; border-bottom: 1px solid #eee; vertical-align: top; }
+  .gap-table tr:nth-child(even) td { background: #F9FCFC; }
+  .gap-table .area { font-family: Arial, sans-serif; font-weight: 700; color: #1B3A5C; font-size: 9.5pt; white-space: nowrap; }
+  .gap-table .gap-val { color: #B03A2E; font-family: Arial, sans-serif; font-size: 9.5pt; }
+
+  /* DELIVERY */
+  .delivery-list { margin: 16px 0; }
+  .delivery-item { display: flex; gap: 16px; align-items: flex-start; padding: 13px 0; border-bottom: 1px solid #eee; }
+  .delivery-item:last-child { border-bottom: none; }
+  .dn { font-family: Arial, sans-serif; font-size: 13pt; font-weight: 700; color: #2A7F7F; width: 26px; flex-shrink: 0; line-height: 1.2; }
+  .dt { font-size: 10.5pt; }
+  .dt strong { font-family: Arial, sans-serif; color: #1B3A5C; }
+
+  /* RIGHTS */
+  .rights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 20px 0; }
+  .rights-box { padding: 18px; background: #F4F9F9; border-top: 3px solid #2A7F7F; }
+  .rights-box h4 { font-family: Arial, sans-serif; font-size: 9.5pt; font-weight: 700; color: #1B3A5C; margin-bottom: 8px; }
+  .rights-box p { font-size: 9.5pt; color: #555; margin: 0; }
+
+  /* CLOSING */
+  .closing-statement { margin-top: 32px; padding: 24px 28px; background: #F4F9F9; border-left: 4px solid #1B3A5C; }
+  .closing-statement p { font-size: 10.5pt; color: #444; margin-bottom: 10px; }
+  .closing-statement p:last-child { margin: 0; font-style: italic; color: #777; font-size: 9.5pt; }
+
+  /* REFERENCES */
+  .references { font-family: Arial, sans-serif; font-size: 8.5pt; color: #777; margin-top: 44px; padding-top: 20px; border-top: 1px solid #ddd; }
+  .references h3 { font-size: 9pt; font-weight: 700; color: #1B3A5C; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+  .ref-item { margin-bottom: 7px; padding-left: 20px; text-indent: -20px; line-height: 1.55; }
+
+  .doc-footer { margin-top: 40px; padding-top: 12px; border-top: 1px solid #eee; font-family: Arial, sans-serif; font-size: 8pt; color: #bbb; display: flex; justify-content: space-between; }
+
+  ul.rlist { margin: 10px 0 14px 20px; }
+  ul.rlist li { margin-bottom: 6px; font-size: 10.5pt; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Portfolio Sample &nbsp;·&nbsp; Independent Analysis &nbsp;·&nbsp; 2026</div>
+  <div class="cover-main">
+    <div style="display:inline-block;background:rgba(42,127,127,0.2);border:1px solid rgba(126,200,200,0.4);padding:5px 12px;margin-bottom:16px;font-family:Arial,sans-serif;font-size:8.5pt;color:#7EC8C8;letter-spacing:1.5px;text-transform:uppercase;">Unsolicited &nbsp;·&nbsp; Independent &nbsp;·&nbsp; Unpaid</div>
+    <div class="cover-label">Case Study: Information Access and Content Strategy</div>
+    <div class="cover-title">A Promise<br>Not Being Kept</div>
+    <div class="cover-sub">An independent analysis of information access, clinical accuracy, and language equity on a public-facing ADHD resource</div>
+  </div>
+  <div class="cover-stats">
+    <div class="cover-stat"><div class="val">6.3%</div><div class="lbl">of Iceland's population on ADHD medication, the highest Nordic rate</div></div>
+    <div class="cover-stat"><div class="val">1.2%</div><div class="lbl">currently on waiting list for assessment</div></div>
+    <div class="cover-stat"><div class="val">21%</div><div class="lbl">of residents cannot access the site's content</div></div>
+    <div class="cover-stat"><div class="val">12 yrs</div><div class="lbl">clinical information out of date on the diagnosis page</div></div>
+  </div>
+  <div class="cover-footer">
+    <span>Anne Mette Heltborg Poulsen &nbsp;·&nbsp; amhpjobs@gmail.com</span>
+    <span>Organisation anonymised</span>
+  </div>
+</div>
+
+<!-- ANALYST NOTE -->
+<div class="page">
+  <div class="page-header"><span>A Promise Not Being Kept</span><span>Analyst's Note</span></div>
+
+  <div class="analyst-note">
+    <div class="an-label">How this analysis came about</div>
+    <p>I came to this site as a user, looking for information the way people do when they are trying to understand something that matters to them. Nobody asked me to look closely. Nobody is paying me to have an opinion. And something kept not quite working, not in one obvious place, but as a feeling that accumulated: the site implied more than it delivered.</p>
+    <p>I notice that kind of friction. It is what I am trained to notice. So I started looking more carefully, and then more carefully still. One gap pointed to another. One outdated claim led me to the primary source, which led me to realise how far the site had drifted from what it was supposed to say. What began as a user's frustration became a structured question: does this site actually do what it says it does?</p>
+    <p>The answer took shape over several weeks of close reading, source verification, and the kind of thinking that happens when you keep asking why something feels wrong until you reach the structural reason underneath. This document is where that process ended up. It was produced entirely on my own initiative, without commission, without access to internal data, and without the organisation's knowledge.</p>
+    <p>It is not a criticism of the people involved. It is an argument about what happens when capacity runs out before the work is done, and about who bears the cost of that gap.</p>
+  </div>
+
+  <h2 class="section-title">What I did: method and approach</h2>
+
+  <div class="method-steps">
+    <div class="method-step">
+      <div class="method-icon">01</div>
+      <div class="method-text"><strong>Direct site review.</strong> A systematic, page-by-page examination of the live website, documenting every gap between what the site implies and what it actually delivers: broken links, missing content, outdated clinical criteria, inaccessible rights information.</div>
+    </div>
+    <div class="method-step">
+      <div class="method-icon">02</div>
+      <div class="method-text"><strong>Primary source verification.</strong> All findings cross-referenced against DSM-5, Statistics Iceland, the Icelandic Grænbók (2024), the OECD Iceland immigrant integration report (2024), peer-reviewed Nordic ADHD cost analyses, and Icelandic legal frameworks around disability rights and accommodation.</div>
+    </div>
+    <div class="method-step">
+      <div class="method-icon">03</div>
+      <div class="method-text"><strong>Structural diagnosis.</strong> Identifying the argument beneath the surface findings: these are not maintenance failures. They are the predictable result of a capacity problem, and that distinction matters, because it points toward a different kind of solution.</div>
+    </div>
+    <div class="method-step">
+      <div class="method-icon">04</div>
+      <div class="method-text"><strong>Synthesis into a usable argument.</strong> Translating the analysis into a format that makes the problem impossible to ignore and the solution concrete, costed, and actionable.</div>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:16px;background:#F4F9F9;border:1px solid #C8D8D8;padding:14px 18px;margin:28px 0 8px;">
+    <div style="font-family:Arial,sans-serif;font-size:8.5pt;font-weight:700;color:#2A7F7F;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;">This work is</div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;">
+      <div style="font-family:Arial,sans-serif;font-size:9.5pt;color:#555;"><strong style="color:#1B3A5C;">Unsolicited.</strong> Initiated without request or invitation</div>
+      <div style="font-family:Arial,sans-serif;font-size:9.5pt;color:#555;"><strong style="color:#1B3A5C;">Unpaid.</strong> Produced at no cost and with no commercial interest</div>
+      <div style="font-family:Arial,sans-serif;font-size:9.5pt;color:#555;"><strong style="color:#1B3A5C;">Independent.</strong> Based entirely on publicly available sources and direct observation</div>
+    </div>
+  </div>
+  <h2 class="section-title">The core finding</h2>
+  <p>The organisation has chosen to host diagnosis information, rights information, and system navigation guidance. The question is no longer whether it should provide this. It already has. The question is whether it provides it <em>accurately, accessibly, and for everyone who needs it.</em></p>
+
+  <div class="callout dark">
+    <div class="callout-label">In its current state, the site does not meet that standard</div>
+    <p>That is not a neutral position. It is a promise that is not being kept. And the people it fails are precisely the people who came to the site because they needed help.</p>
+  </div>
+</div>
+
+<!-- SECTION 1 -->
+<div class="page">
+  <div class="page-header"><span>A Promise Not Being Kept</span><span>1. The Scale of the Challenge</span></div>
+
+  <h2 class="section-title"><span class="num">1.</span> The scale of the challenge</h2>
+
+  <p>Iceland has the highest rate of ADHD medication use in the Nordic countries. 6.3% of the total population, all ages and genders, are currently on stimulant medication.<sup>1</sup> Behind that number are real people: adults who spent years not knowing why things were hard, parents trying to understand what their child is entitled to, people who finally have a name for what they experience, now trying to figure out what comes next.</p>
+
+  <div class="callout">
+    <div class="callout-label">A note on diagnosis rates</div>
+    <p>Iceland's high medication rate has attracted scrutiny. A study published in the Icelandic Medical Journal (2024) concluded that use is two to three times higher than internationally expected prevalence rates, prompting the Ministry of Health to establish a working group. This debate does not diminish the need for accurate, accessible information. If anything, it increases it. People navigating a contested landscape need reliable guidance more, not less.</p>
+  </div>
+
+  <p>The Directorate of Health estimates prevalence at 3.4–7.2% among youth and 2.5–6.8% among adults, which translates to between 9,800 and 36,000 adults who may be living with ADHD, a significant share of them undiagnosed or still waiting.<sup>1,6</sup></p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Average waiting time for ADHD assessment in Iceland</div>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Children &amp; adolescents</div>
+        <div class="bar-track"><div class="bar-fill teal" style="width:30%"><span class="bv">avg. 3 years</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Adults</div>
+        <div class="bar-track"><div class="bar-fill navy" style="width:88%"><span class="bv">avg. 2–3 yrs &nbsp;/&nbsp; up to 10 yrs in complex cases</span></div></div>
+      </div>
+    </div>
+    <div class="chart-source">Source: Hjálmarsson (2025), The Nordic Psychiatrist [1,2]</div>
+  </div>
+
+  <p>During that wait: no formal diagnosis, no access to medication, no legal basis for workplace or school accommodations. Children fall behind without a documented reason. Adults manage jobs, relationships, and daily life without knowing what they are managing, or what help they are entitled to. What they need, now, while they wait, is reliable information. That information is supposed to live on the site I reviewed.</p>
+</div>
+
+<!-- SECTION 2 -->
+<div class="page">
+  <div class="page-header"><span>A Promise Not Being Kept</span><span>2. What Is at Stake</span></div>
+
+  <h2 class="section-title"><span class="num">2.</span> What is at stake: the cost of getting it wrong</h2>
+
+  <p>Waiting has a cost. A Danish sibling study (Daley et al., 2019), the most methodologically rigorous cost analysis to date, puts the economic burden of adult ADHD at approximately 2.9 millión ISK per person per year (~€20,000).<sup>7</sup> That breaks down as ~1.8 millión ISK in public costs and ~1.1 millión ISK in personal costs.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Ordinary employment income: adults with ADHD vs. general population</div>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">General population</div>
+        <div class="bar-track"><div class="bar-fill teal" style="width:72%"><span class="bv">72%</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Adults with ADHD</div>
+        <div class="bar-track"><div class="bar-fill orange" style="width:22%"><span class="bv">22%</span></div></div>
+      </div>
+    </div>
+    <div class="chart-source">Source: Halmøy et al. (2009), Norway [9]. Most methodologically comparable proxy for Iceland.</div>
+  </div>
+
+  <div class="note-box">Iceland has not published equivalent national employment data for adults with ADHD. The Grænbók (2024) states explicitly that 'upplýsingar um fjölda ADHD-greininga liggur ekki fyrir', meaning information on the number of ADHD diagnoses is not available, and recommends establishing a national diagnostic register as a key priority.<sup>19</sup> Norway is used as the most appropriate proxy given comparable welfare model, labour market structure, and prevalence rates.</div>
+
+  <div class="cost-ratio">
+    <div class="cr-box left">
+      <div class="cr-val">~21 milljarðar kr.</div>
+      <div class="cr-lbl">Estimated annual system cost in Iceland: lost employment, income transfers, fragmented healthcare<sup>7,19</sup></div>
+    </div>
+    <div class="cr-mid">
+      <div class="cr-ratio">14,000×</div>
+      <div class="cr-mid-lbl">cost ratio</div>
+    </div>
+    <div class="cr-box right">
+      <div class="cr-val">~1.5 millión kr.</div>
+      <div class="cr-lbl">Estimated cost of a one-year content project: content audit, rewritten texts, English translation, rights information in usable form</div>
+    </div>
+  </div>
+
+  <div class="note-box">The Iceland system cost is a projection based on Nordic data applied to an estimated 7,350 adults with ADHD (3% of ~245,000 adults). Iceland has not published a national ADHD cost analysis. The Grænbók (2024) explicitly references Nordic figures as the applicable benchmark.<sup>19</sup></div>
+
+  <p>Without a diagnosis, none of the daily consequences of an unmanaged condition have a name. They are read by employers, teachers, partners, and the person themselves as a character flaw. Repeated failure to meet expectations that feel reasonable to everyone else produces not just practical difficulties but chronic self-blame and eroded confidence. What these people need, now, is accurate information about what they are entitled to.</p>
+</div>
+
+<!-- SECTION 3 -->
+<div class="page">
+  <div class="page-header"><span>A Promise Not Being Kept</span><span>3. What a Diagnosis Unlocks</span></div>
+
+  <h2 class="section-title"><span class="num">3.</span> What a diagnosis actually unlocks</h2>
+
+  <p>A diagnosis is not only a clinical label. In Iceland, it is the gateway to a set of concrete, legally grounded rights. Many people on the waiting list do not know exist, because the information is not clearly presented anywhere they can find it.</p>
+
+  <div class="rights-grid">
+    <div class="rights-box">
+      <h4>Medication costs</h4>
+      <p>Covered under Sjúkratryggingar Íslands. Adults pay out of pocket up to 22,000 ISK/year, then 15%, then 7.5%. Annual personal maximum: ~62,000 ISK. Without this, many assume medication is simply unaffordable.<sup>15</sup></p>
+    </div>
+    <div class="rights-box">
+      <h4>Workplace rights</h4>
+      <p>Iceland is bound by the UN CRPD (ratified 2016) and the EU Employment Equality Directive, both of which establish employer duty to provide reasonable accommodations for neuropsychological conditions including ADHD.<sup>16</sup></p>
+    </div>
+    <div class="rights-box">
+      <h4>Educational accommodations</h4>
+      <p>University students with neuropsychological diagnoses are entitled to extended exam time, separate examination rooms, and note-taking support. Secondary schools are required by Icelandic law to provide support.<sup>17,18</sup></p>
+    </div>
+  </div>
+
+  <div class="callout critical">
+    <div class="callout-label">None of this is currently accessible in usable form</div>
+    <p>The rights section contains eight pages of headings with no application processes, no agency contacts, and three broken links. The information that determines whether people can afford medication, keep a job, or stay in education exists on the site in name only.</p>
+  </div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="page">
+  <div class="page-header"><span>A Promise Not Being Kept</span><span>4. Who the Site Actually Serves</span></div>
+
+  <h2 class="section-title"><span class="num">4.</span> Who the site actually serves</h2>
+
+  <p>None of the rights information is available in any language other than Icelandic. This matters more than it might appear.</p>
+
+  <p>As of 1 January 2025, 73,795 immigrants live in Iceland, 18.9% of the total population, the highest share ever recorded. Including second-generation immigrants, the figure reaches 21%.<sup>10</sup> The foreign population grew by 4.2% in 2025; the Icelandic-citizen population grew by 0.6%.<sup>21</sup></p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Who can effectively use the site today</div>
+    <div class="access-bar-wrap">
+      <div class="access-bar">
+        <div class="ab-seg" style="flex:79;background:#1B3A5C;">
+          <div class="abv">79%</div>
+          <div class="abl">Icelandic speakers</div>
+        </div>
+        <div class="ab-seg" style="flex:21;background:#B03A2E;">
+          <div class="abv">21%</div>
+          <div class="abl">cannot navigate</div>
+        </div>
+      </div>
+    </div>
+    <div class="chart-source">Source: Statistics Iceland, 1 Jan 2025 [10]</div>
+  </div>
+
+  <p>An OECD review (2024) found that immigrants in Iceland have the lowest host-country language proficiency of any OECD country with available data: only 18% report advanced Icelandic proficiency, against an OECD average of 60%. Among those resident five to ten years, the figure is 7%.<sup>20</sup></p>
+
+  <div class="stat-grid">
+    <div class="stat-cell"><div class="sv">22,925</div><div class="sl">Polish-origin residents, the largest immigrant group and among those with the lowest average Icelandic proficiency</div></div>
+    <div class="stat-cell"><div class="sv">18%</div><div class="sl">Immigrants with advanced Icelandic proficiency (OECD average: 60%)</div></div>
+    <div class="stat-cell"><div class="sv">98%</div><div class="sl">of Iceland's residents speak English, compared to 93.2% who speak Icelandic<sup>21</sup></div></div>
+  </div>
+
+  <p>English is not a foreign language in Iceland. It is the default shared language. Keeping the site Icelandic-only is no longer a neutral default. It is a structural decision about who the information serves. With 21% of residents having an immigrant background, and that proportion rising every year, the decision to remain Icelandic-only excludes a growing share of the population that already faces higher rates of late diagnosis and employment instability.</p>
+</div>
+
+<!-- SECTION 5 -->
+<div class="page">
+  <div class="page-header"><span>A Promise Not Being Kept</span><span>5. Clinical Accuracy</span></div>
+
+  <h2 class="section-title"><span class="num">5.</span> Clinical information: frozen in 1994</h2>
+
+  <p>Consider a newly diagnosed adult who comes to the site wanting to understand their diagnosis. They find a page stating that symptoms must have been present before age 7. They think: that was not me. Maybe they have it wrong.</p>
+
+  <p style="font-family:Arial,sans-serif;font-weight:700;color:#B03A2E;font-size:11pt;">That criterion has been out of date since 2013.</p>
+
+  <div class="dsm-compare">
+    <div class="dsm-box old">
+      <div class="dsm-tag">What the site currently says</div>
+      <div class="dsm-val">Before age 7</div>
+      <div class="dsm-sub">DSM-IV criterion, published 1994</div>
+    </div>
+    <div class="dsm-box new">
+      <div class="dsm-tag">Current clinical standard</div>
+      <div class="dsm-val">Before age 12</div>
+      <div class="dsm-sub">DSM-5, in force since 2013</div>
+    </div>
+  </div>
+
+  <div class="callout critical">
+    <div class="callout-label">Critical finding, verified by direct site inspection</div>
+    <p>The diagnosis page still uses the DSM-IV 'before age 7' criterion. DSM-5 has been the operative standard since 2013. Adults who developed symptoms between ages 7 and 12 may be incorrectly concluding, based on information on this site, that they do not qualify for diagnosis. The site also references population statistics from 2008. A person reading them today has no way of knowing they are not current.</p>
+  </div>
+
+  <p>These are not obscure edge cases. The DSM-5 age-of-onset change was one of the most significant updates in the revision, specifically designed to capture adults who were missed under the old criteria. Getting this wrong does not just misinform. It actively discourages people from seeking help they are entitled to.</p>
+</div>
+
+<!-- SECTION 6 -->
+<div class="page">
+  <div class="page-header"><span>A Promise Not Being Kept</span><span>6. The Full Picture</span></div>
+
+  <h2 class="section-title"><span class="num">6.</span> The full picture: promise vs. reality</h2>
+
+  <p>The table below reflects direct observation of the live website, March–April 2026. These are observations, not inferences.</p>
+
+  <table class="gap-table">
+    <thead>
+      <tr><th>Area</th><th>What the site implies</th><th>What it actually delivers</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="area">Waiting times</td><td>Support for people navigating the system</td><td class="gap-val">Zero mentions of waiting times, costs, or timelines anywhere on the site</td></tr>
+      <tr><td class="area">Rights</td><td>8 pages covering ADHD rights</td><td class="gap-val">No application processes, no agency contacts, 3 broken links</td></tr>
+      <tr><td class="area">Articles (Greinar)</td><td>7 category headings present</td><td class="gap-val">Zero articles published</td></tr>
+      <tr><td class="area">Clinical info</td><td>Information about diagnosis</td><td class="gap-val">DSM-IV criterion (1994), not DSM-5 (2013)</td></tr>
+      <tr><td class="area">Population stats</td><td>Iceland context</td><td class="gap-val">Statistics from 2008, now 17+ years out of date</td></tr>
+      <tr><td class="area">Language access</td><td>Public information resource</td><td class="gap-val">Icelandic only, inaccessible to approximately 21% of residents</td></tr>
+      <tr><td class="area">Contact details</td><td>Staff listed on website</td><td class="gap-val">Email display mismatch: different address shown vs. href</td></tr>
+      <tr><td class="area">Technical</td><td>CMS-managed content</td><td class="gap-val">CMS placeholder 'READMORENEWS' visible to users</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <div class="callout-label">This is a capacity problem, not a quality problem</div>
+    <p>These are not the signs of a poorly run organisation. They are the predictable result of four staff members carrying operational, communications, and advocacy responsibilities simultaneously. The site is not broken because of negligence. It is incomplete because of capacity, and capacity problems have concrete, fundable solutions.</p>
+  </div>
+</div>
+
+<!-- SECTION 7 -->
+<div class="page">
+  <div class="page-header"><span>A Promise Not Being Kept</span><span>7. What This Shows &amp; What Could Change</span></div>
+
+  <h2 class="section-title"><span class="num">7.</span> What this shows, and what could change</h2>
+
+  <p>The gaps identified here are not technical. They are content problems: what the site says, how it is structured, and who it reaches. These are precisely the kinds of problems that content strategy, plain-language rewriting, information architecture, and a sustainable maintenance framework can fix.</p>
+
+  <p>The case for external grant funding is strong. The work is clearly scoped. The need is evidenced. The target population is defined and the gap is measurable. Nordic and Icelandic funding bodies, including Velferðarráðuneytið, patient organisation grants and Nordic health cooperation funds, routinely support exactly this kind of content and knowledge infrastructure project.</p>
+
+  <h3 class="sub-title">A one-year project role would deliver:</h3>
+
+  <div class="delivery-list">
+    <div class="delivery-item"><div class="dn">1</div><div class="dt"><strong>Full content audit.</strong> Every page and every claim documented, gaps prioritised, with a clear action plan</div></div>
+    <div class="delivery-item"><div class="dn">2</div><div class="dt"><strong>Rewritten core texts</strong>, ready to publish: diagnosis information aligned with DSM-5, rights overview, support pathways</div></div>
+    <div class="delivery-item"><div class="dn">3</div><div class="dt"><strong>English translation of key content</strong>, starting with the sections most critical for non-Icelandic-speaking families: rights, medication, accommodations</div></div>
+    <div class="delivery-item"><div class="dn">4</div><div class="dt"><strong>Costed technical recommendations</strong>, specific and structured, ready to hand to an external developer</div></div>
+    <div class="delivery-item"><div class="dn">5</div><div class="dt"><strong>Content maintenance framework</strong>: templates, update schedules and editorial guidelines so the organisation can sustain accuracy going forward</div></div>
+  </div>
+
+  <div class="closing-statement">
+    <p>The knowledge is there. The data is there. The intent is there. What is missing is dedicated resource: someone whose only job is to take what exists and make it work for the people who need it.</p>
+    <p>This analysis demonstrates what that work looks like in practice: starting from a user's experience, following the evidence, identifying the structural cause beneath the surface symptom, and producing an argument that makes the problem impossible to ignore and the solution impossible to dismiss.</p>
+    <p>This analysis was conducted independently, without commission or access to internal data, as a practice-based contribution to a public interest question. All factual claims have been cross-checked against primary sources.</p>
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="references">
+    <h3>References</h3>
+    <div class="ref-item">1. Hjálmarsson, V. (2025). Is ADHD being over-diagnosed and over-treated in Iceland? The Nordic Psychiatrist. thenordicpsychiatrist.com</div>
+    <div class="ref-item">2. Hjálmarsson, V. (2025). Green paper on ADHD in Iceland, waiting lists and medication use. thenordicpsychiatrist.com</div>
+    <div class="ref-item">3. adhd.is. (2026). Starfsfólk [Staff page]. Direct site observation, March–April 2026.</div>
+    <div class="ref-item">4. Ayano et al. (2023). Prevalence of ADHD in adults: Umbrella review. Psychiatry Research, 328, 115449.</div>
+    <div class="ref-item">5. Salari et al. (2023). Global prevalence of ADHD in children and adolescents. Italian Journal of Pediatrics, 49(1), 48.</div>
+    <div class="ref-item">6. Iceland Review. (2025, Q3). One in five Iceland residents now foreign nationals.</div>
+    <div class="ref-item">7. Daley et al. (2019). The economic burden of adult ADHD: A sibling comparison cost analysis. European Psychiatry, 61, 41–48.</div>
+    <div class="ref-item">8. ADDA. (n.d.). Impact of ADHD at Work. add.org</div>
+    <div class="ref-item">9. Halmøy et al. (2009). Occupational outcome in adult ADHD. Journal of Attention Disorders, 13(2), 175–187.</div>
+    <div class="ref-item">10. Statistics Iceland. (2025, January 1). Population by origin 1 January 2025. statice.is</div>
+    <div class="ref-item">11. American Psychiatric Association. (2013). DSM-5. Age-of-onset criterion: before age 12.</div>
+    <div class="ref-item">12. ADDA. (2013). New Diagnostic Criteria for ADHD. add.org</div>
+    <div class="ref-item">13. Direct site observations, structured review, March–April 2026.</div>
+    <div class="ref-item">14. Central Bank of Iceland. (2026, April 7). Official exchange rate: EUR/ISK = 144.</div>
+    <div class="ref-item">15. Sjúkratryggingar Íslands. Drug subsidy system, tiered co-payment model.</div>
+    <div class="ref-item">16. UN CRPD (Iceland ratified 2016) &amp; EU Employment Equality Directive 2000/78/EC via EEA Agreement.</div>
+    <div class="ref-item">17. University of Iceland. Disability Services. english.hi.is</div>
+    <div class="ref-item">18. Eurydice / European Commission. (2023). Iceland: Educational Support and Guidance.</div>
+    <div class="ref-item">19. Landlæknir. (2024). Grænbók um ADHD-mál á Íslandi. samráðsgátt.island.is</div>
+    <div class="ref-item">20. OECD. (2024). Skills and Labour Market Integration of Immigrants and their Children in Iceland.</div>
+    <div class="ref-item">21. Iceland Review. (2025, December 19). Foreign population in Iceland rises to nearly 84,000.</div>
+  </div>
+
+  <div class="doc-footer">
+    <span>Anne Mette Heltborg Poulsen &nbsp;·&nbsp; amhpjobs@gmail.com</span>
+    <span>Portfolio sample, organisation anonymised</span>
+  </div>
+</div>
+
+
+
+</body></html>

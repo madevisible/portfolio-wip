@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Forgotten Biome: Portfolio</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; font-size: 11pt; color: #2c2c2c; background: #fff; line-height: 1.7; }
+  .page { max-width: 820px; margin: 0 auto; padding: 60px 64px; }
+
+  /* COVER: deeper, darker, more cosmic than the others */
+  .cover { min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 80px 64px; background: #0D1F2D; }
+  .cover-tag { font-family: Arial, sans-serif; font-size: 9pt; color: rgba(255,255,255,0.35); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 80px; }
+  .cover-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .cover-label { font-family: Arial, sans-serif; font-size: 9pt; color: #7EC8C8; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+  .cover-title { font-size: 46pt; font-weight: 700; color: #ffffff; line-height: 1.05; margin-bottom: 8px; }
+  .cover-subtitle { font-family: Arial, sans-serif; font-size: 11pt; color: rgba(126,200,200,0.8); margin-bottom: 28px; font-style: italic; }
+  .cover-sub { font-family: Arial, sans-serif; font-size: 12pt; color: rgba(255,255,255,0.6); max-width: 540px; line-height: 1.65; border-left: 3px solid #2A7F7F; padding-left: 20px; margin-bottom: 60px; }
+  .cover-thread { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.08); margin-top: 20px; }
+  .cover-thread-box { padding: 20px 16px; background: rgba(255,255,255,0.04); }
+  .cover-thread-box .cv { font-family: Arial, sans-serif; font-size: 9pt; font-weight: 700; color: #7EC8C8; margin-bottom: 6px; }
+  .cover-thread-box .cl { font-family: Arial, sans-serif; font-size: 8.5pt; color: rgba(255,255,255,0.45); line-height: 1.4; }
+  .cover-footer { margin-top: 48px; font-family: Arial, sans-serif; font-size: 9pt; color: rgba(255,255,255,0.3); display: flex; justify-content: space-between; }
+
+  .page-header { font-family: Arial, sans-serif; font-size: 8pt; color: #bbb; letter-spacing: 1px; text-transform: uppercase; padding-bottom: 12px; border-bottom: 1px solid #e8e8e8; margin-bottom: 40px; display: flex; justify-content: space-between; }
+
+  h2.section-title { font-family: Arial, sans-serif; font-size: 12pt; font-weight: 700; color: #1B3A5C; margin: 44px 0 8px; padding-bottom: 8px; border-bottom: 2px solid #2A7F7F; }
+  h2.section-title .num { color: #2A7F7F; margin-right: 8px; }
+  h3.sub-title { font-family: Arial, sans-serif; font-size: 10.5pt; font-weight: 700; color: #1B3A5C; margin: 24px 0 6px; }
+  p { margin-bottom: 13px; }
+
+  .origin { background: #F4F9F9; border-left: 4px solid #2A7F7F; padding: 28px 32px; margin-bottom: 32px; }
+  .origin .o-label { font-family: Arial, sans-serif; font-size: 8.5pt; font-weight: 700; color: #2A7F7F; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+  .origin p { font-size: 10.5pt; color: #444; margin-bottom: 10px; }
+  .origin p:last-child { margin-bottom: 0; }
+
+  .callout { border-left: 4px solid #2A7F7F; background: #EEF6F6; padding: 18px 22px; margin: 22px 0; }
+  .callout.dark { background: #0D1F2D; border-left-color: #7EC8C8; }
+  .callout.theory { background: #F8F4EE; border-left-color: #8B6914; }
+  .callout-label { font-family: Arial, sans-serif; font-size: 8.5pt; font-weight: 700; color: #2A7F7F; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .callout.dark .callout-label { color: #7EC8C8; }
+  .callout.theory .callout-label { color: #8B6914; }
+  .callout p { font-size: 10.5pt; margin: 0; }
+  .callout.dark p { color: rgba(255,255,255,0.82); }
+  .callout.theory p { color: #555; }
+
+  /* TRANSLATION DIAGRAM */
+  .translation { display: grid; grid-template-columns: 1fr 48px 1fr; gap: 0; margin: 28px 0; align-items: stretch; }
+  .trans-box { padding: 22px 20px; }
+  .trans-box.left { background: #EEF6F6; border: 1px solid #C8D8D8; }
+  .trans-box.right { background: #0D1F2D; }
+  .trans-label { font-family: Arial, sans-serif; font-size: 8pt; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+  .trans-box.left .trans-label { color: #2A7F7F; }
+  .trans-box.right .trans-label { color: #7EC8C8; }
+  .trans-title { font-family: Arial, sans-serif; font-size: 11pt; font-weight: 700; color: #1B3A5C; margin-bottom: 8px; }
+  .trans-box.right .trans-title { color: white; }
+  .trans-box p { font-size: 9.5pt; color: #555; margin: 0; line-height: 1.55; }
+  .trans-box.right p { color: rgba(255,255,255,0.7); }
+  .trans-arrow { display: flex; align-items: center; justify-content: center; font-size: 20pt; color: #2A7F7F; background: white; border-top: 1px solid #C8D8D8; border-bottom: 1px solid #C8D8D8; }
+
+  /* WORLD ELEMENTS */
+  .world-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .world-box { padding: 18px 20px; background: #F4F9F9; border-top: 3px solid #1B3A5C; }
+  .world-box h4 { font-family: Arial, sans-serif; font-size: 9.5pt; font-weight: 700; color: #1B3A5C; margin-bottom: 6px; }
+  .world-box .wb-sub { font-family: Arial, sans-serif; font-size: 8pt; color: #2A7F7F; font-weight: 700; margin-bottom: 6px; letter-spacing: 0.5px; }
+  .world-box p { font-size: 9.5pt; color: #555; margin: 0; line-height: 1.55; }
+
+  /* THEORY CONNECTIONS */
+  .theory-row { display: grid; grid-template-columns: 200px 1fr; gap: 20px; padding: 14px 0; border-bottom: 1px solid #eee; align-items: start; }
+  .theory-row:last-child { border-bottom: none; }
+  .theory-source { font-family: Arial, sans-serif; font-size: 9pt; font-weight: 700; color: #8B6914; line-height: 1.4; }
+  .theory-source .ts-sub { font-weight: 400; color: #aaa; font-size: 8pt; display: block; margin-top: 2px; }
+  .theory-connection p { font-size: 10pt; color: #555; margin: 0; line-height: 1.6; }
+
+  /* CONCEPT EXCERPT */
+  .excerpt { background: #0D1F2D; padding: 28px 32px; margin: 28px 0; }
+  .excerpt .ex-label { font-family: Arial, sans-serif; font-size: 8.5pt; font-weight: 700; color: #7EC8C8; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px; }
+  .excerpt p { font-family: Georgia, serif; font-size: 10.5pt; color: rgba(255,255,255,0.8); margin-bottom: 12px; line-height: 1.7; }
+  .excerpt p:last-child { margin-bottom: 0; }
+  .excerpt .ex-note { font-family: Arial, sans-serif; font-size: 8.5pt; color: rgba(255,255,255,0.35); margin-top: 16px; font-style: italic; }
+
+  /* METHOD */
+  .method-steps { margin: 16px 0; }
+  .method-step { display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid #eee; align-items: flex-start; }
+  .method-step:last-child { border-bottom: none; }
+  .ms-num { font-family: Arial, sans-serif; font-size: 10pt; font-weight: 700; color: #2A7F7F; width: 28px; flex-shrink: 0; }
+  .ms-text { font-size: 10.5pt; }
+  .ms-text strong { font-family: Arial, sans-serif; color: #1B3A5C; }
+
+  .closing { margin-top: 32px; padding: 24px 28px; background: #F4F9F9; border-left: 4px solid #1B3A5C; }
+  .closing p { font-size: 10.5pt; color: #444; margin-bottom: 10px; }
+  .closing p:last-child { margin: 0; font-style: italic; color: #777; font-size: 9.5pt; }
+
+  .sources { margin-top: 24px; padding-top: 16px; border-top: 1px solid #ddd; font-family: Arial, sans-serif; font-size: 8.5pt; color: #777; }
+  .sources .s-label { font-weight: 700; color: #1B3A5C; margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase; font-size: 8pt; }
+  .sources div { margin-bottom: 4px; line-height: 1.5; }
+
+  .doc-footer { margin-top: 28px; padding-top: 12px; border-top: 1px solid #eee; font-family: Arial, sans-serif; font-size: 8pt; color: #bbb; display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Narrative Design Sample &nbsp;·&nbsp; Portfolio &nbsp;·&nbsp; 2024–2025</div>
+  <div class="cover-main">
+    <div class="cover-label">World-Building &nbsp;·&nbsp; Narrative Systems &nbsp;·&nbsp; Transmedia Translation</div>
+    <div class="cover-title">The Forgotten<br>Biome.</div>
+    <div class="cover-subtitle">From children's story to sci-fi concept, the same ecology, a different sky</div>
+    <div class="cover-sub">A narrative design sample showing how a world built around ecological systems, rhythm and the slow erosion of connection can be translated from one context to another while keeping its structural core intact.</div>
+    <div class="cover-thread">
+      <div class="cover-thread-box">
+        <div class="cv">The origin</div>
+        <div class="cl">A children's story about missing bees, a mole who listens to the earth, and a world losing its rhythm, built for a car ride that never happened.</div>
+      </div>
+      <div class="cover-thread-box">
+        <div class="cv">The translation</div>
+        <div class="cl">The same ecological logic transposed into a sci-fi universe: a self-healing world at the edge of space, where players restore resonance rather than extract resources.</div>
+      </div>
+      <div class="cover-thread-box">
+        <div class="cv">The destination</div>
+        <div class="cl">Developed for a Narrative Designer application at CCP Games (EVE Online). Submitted to their candidate bank after the official deadline.</div>
+      </div>
+    </div>
+  </div>
+  <div class="cover-footer">
+    <span>Anne Mette Heltborg Poulsen &nbsp;·&nbsp; amhpjobs@gmail.com</span>
+    <span>Portfolio sample</span>
+  </div>
+</div>
+
+<!-- PAGE 1: ORIGIN + WHAT THIS SHOWS -->
+<div class="page">
+  <div class="page-header"><span>The Forgotten Biome.</span><span>Origin and Context</span></div>
+
+  <div class="origin">
+    <div class="o-label">Where this came from</div>
+    <p>In the summer of 2024, I began writing a story for my children, something to make long car rides pass. It was supposed to be about elves, rainbows and gentle magic. But somewhere along the way, it grew into something else: a layered universe built around ecological systems, the slow erosion of connection, and the idea that what has been forgotten can be remembered rather than replaced.</p>
+    <p>The world of Fulla, with its missing bees, its mycelium networks tended by industrious worms, and its mole who listens to the earth, was not designed against a theoretical framework. It emerged intuitively, from the inside out. It was only later, when I began to research the application for CCP Games, that I recognised how precisely the world's internal logic maps onto documented thinking in ecological systems theory, narrative game design and transmedia world-building.</p>
+    <p>That alignment between intuitive construction and theoretical grounding is what this sample is about. Not the story itself, but what the story demonstrates about how I think.</p>
+  </div>
+
+  <h2 class="section-title">The structural core</h2>
+
+  <p>The world of Fulla is built around three interconnected systems that mirror real ecological logic: pollinators (the bees, who maintain rhythm and connection above ground), mycorrhizal networks (the mycelium, tended by the worms below ground), and decomposers (the compost worms, who transform what was into what can be). This three-layer structure was not borrowed from ecology. It arrived through the internal logic of the story. That it matches what Suzanne Simard documented in her landmark research on forest communication networks (Nature, 1997) is not a coincidence. It is what happens when systems thinking is applied to world-building with genuine attention.</p>
+
+  <div class="callout theory">
+    <div class="callout-label">Intuition and research landing in the same place</div>
+    <p>The world's core design principle: that connection erodes gradually, that the absence feels wrong before it can be named, and that restoration requires listening rather than action, maps directly onto Robin Wall Kimmerer's concept of the "grammar of animacy" (Braiding Sweetgrass, 2013) and Ursula K. Le Guin's "Carrier Bag Theory of Fiction" (1986): the idea that the most powerful stories are not about conquest but about gathering, tending and remembering. Neither source was consulted during the writing. The world arrived at the same conclusions by following its own internal logic.</p>
+  </div>
+
+  <h2 class="section-title">The translation</h2>
+
+  <p>When the CCP Games application appeared, the question was not whether to apply. It was whether the world of Fulla could survive translation into a radically different context without losing what made it coherent. The answer turned out to be yes, and the process of finding that answer is itself the demonstration.</p>
+
+  <div class="translation">
+    <div class="trans-box left">
+      <div class="trans-label">Source world</div>
+      <div class="trans-title">The Realm of the Álfar</div>
+      <p>A sensation beneath reality. Held together by rhythm and connection. Missing bees. Fading colours. A silence that grows loud. One who notices before she understands, and another who chooses to listen.</p>
+    </div>
+    <div class="trans-arrow">→</div>
+    <div class="trans-box right">
+      <div class="trans-label">Translated world</div>
+      <div class="trans-title">The Forgotten Biome</div>
+      <p>A world thought extinct at the edge of space. A signal older than the technology detecting it. A planet that healed itself, slowly, stubbornly. Players who restore resonance rather than extract resources.</p>
+    </div>
+  </div>
+
+  <p>The core logic survives intact across the translation: connection erodes gradually and without announcement; restoration requires attention and patience, not force; the system has its own memory and will find its rhythm again if someone creates the conditions. What changes is the container: the aesthetics, the mechanics, the audience. What does not change is the underlying design philosophy.</p>
+
+  <div class="callout dark">
+    <div class="callout-label">The design principle that drives both worlds</div>
+    <p>"The consequences wouldn't be moral in a binary sense. They would be rhythmic. Each player's decisions could alter the planet's tone, colour and atmospheric behaviour, quietly feeding back into the wider network. A living metaphor for how balance, once disturbed, must be felt before it can be fixed."</p>
+  </div>
+</div>
+
+<!-- PAGE 2: THE WORLDS + THEORY -->
+<div class="page">
+  <div class="page-header"><span>The Forgotten Biome.</span><span>The Worlds and the Thinking Behind Them</span></div>
+
+  <h2 class="section-title"><span class="num">2.</span> What each world contains</h2>
+
+  <div class="world-grid">
+    <div class="world-box">
+      <div class="wb-sub">Álfar world</div>
+      <h4>The Western Tree</h4>
+      <p>Not a deity but a structure. The backbone of the ecological system. Everything orients around it not because it commands but because it endures. It is not to be saved, only remembered.</p>
+    </div>
+    <div class="world-box">
+      <div class="wb-sub">Forgotten Biome</div>
+      <h4>The Flicker</h4>
+      <p>A signal that should not exist. Older than the technology detecting it. Not a distress call. A resonance. The planet's memory, still trying to reconnect. Following it does not lead to conquest, but to understanding.</p>
+    </div>
+    <div class="world-box">
+      <div class="wb-sub">Álfar world</div>
+      <h4>The Bees</h4>
+      <p>Not insects but rhythm. They maintained connection through pattern and dance. They did not disappear with drama. They withdrew quietly, when the connections they served had already begun to break.</p>
+    </div>
+    <div class="world-box">
+      <div class="wb-sub">Forgotten Biome</div>
+      <h4>The Old Woman</h4>
+      <p>A passenger whose memory drifts between clarity and confusion. She recognises the signal before anyone else does. Not because she is special. Because she remembers. She draws symbols. Whispers names no one knows yet.</p>
+    </div>
+    <div class="world-box">
+      <div class="wb-sub">Álfar world</div>
+      <h4>The Compost Worms</h4>
+      <p>"They turn what was into what can be, not with spells, but with rhythm, teamwork, and time." The underground workers. The ones who do what must be done, without ceremony, because the system requires it.</p>
+    </div>
+    <div class="world-box">
+      <div class="wb-sub">Forgotten Biome</div>
+      <h4>The Pilots</h4>
+      <p>Assigned to protect the refugees, they begin to see something shift in themselves: patterns, reciprocity, a different kind of intelligence. They arrive as extractors. The world asks them to become stewards.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title"><span class="num">3.</span> Where the thinking connects to documented research</h2>
+
+  <p>The following connections were identified after the work was done, not before. They are offered here as evidence that the intuitive approach produces results consistent with established theory, not as a claim to academic credentials.</p>
+
+  <div class="theory-row">
+    <div class="theory-source">Simard (1997)
+      <span class="ts-sub">Nature: forest communication networks</span>
+    </div>
+    <div class="theory-connection"><p>The three-layer ecological structure in Fullas world (pollinators above ground, mycelium networks below, decomposers transforming what was) directly mirrors Simard's documented model of forest interdependence. The worms explicitly install and maintain the mycelium network as their central function, arrived at through narrative logic, not ecological research.</p></div>
+  </div>
+  <div class="theory-row">
+    <div class="theory-source">Le Guin (1986)
+      <span class="ts-sub">The Carrier Bag Theory of Fiction</span>
+    </div>
+    <div class="theory-connection"><p>Le Guin argues that the dominant narrative form: the hero's journey, the act of conquest, represents only one way of telling stories, and not necessarily the most honest one. The alternative is the carrier bag: gathering, tending, remembering. Fulla is not a hero. She is someone who notices and insists. The world is not saved. It is reconnected.</p></div>
+  </div>
+  <div class="theory-row">
+    <div class="theory-source">Kimmerer (2013)
+      <span class="ts-sub">Braiding Sweetgrass</span>
+    </div>
+    <div class="theory-connection"><p>Kimmerer's concept of the "grammar of animacy": treating the natural world as subject rather than object, as something with its own intelligence and intention, is the philosophical foundation of both worlds. The planet heals itself. The bees withdraw when the connections they served are broken. The earth has memory. These are not metaphors in these worlds. They are structural facts.</p></div>
+  </div>
+  <div class="theory-row">
+    <div class="theory-source">Mateas and Stern (2005)
+      <span class="ts-sub">Façade: emergent narrative design</span>
+    </div>
+    <div class="theory-connection"><p>The Forgotten Biome's gameplay logic: consequences that are rhythmic rather than binary, a world that responds to attention and care rather than to force, is a practical application of emergent narrative design: systems that generate story through interaction rather than scripted outcomes. "Solving it doesn't lead to conquest or loot. It leads to understanding."</p></div>
+  </div>
+  <div class="theory-row">
+    <div class="theory-source">Jenkins (2006)
+      <span class="ts-sub">Convergence Culture: transmedia storytelling</span>
+    </div>
+    <div class="theory-connection"><p>The same world exists as children's book chapters, a rolleplaying game concept, a ceremonial song in both Danish and Icelandic, and a sci-fi game pitch. This is not fragmentation. It is a world large enough to support multiple entry points without losing its core. Each version adds something the others cannot. The logic holds across all of them.</p></div>
+  </div>
+</div>
+
+<!-- PAGE 3: EXCERPT + METHOD + CLOSING -->
+<div class="page">
+  <div class="page-header"><span>The Forgotten Biome.</span><span>Excerpt and Method</span></div>
+
+  <h2 class="section-title"><span class="num">4.</span> From the concept sheet</h2>
+
+  <div class="excerpt">
+    <div class="ex-label">The Forgotten Biome: narrative premise (excerpt)</div>
+    <p>Maybe it begins with a flicker. A signal that should not exist, faint, fractured, older than the technology detecting it.</p>
+    <p>A transport ship, running low on rations and carrying survivors from a world lost to its own greed, picks it up by chance. Most dismiss it as static. But one of the oldest passengers, a woman whose memory drifts between clarity and confusion, suddenly changes. Her eyes light up. She starts drawing symbols, whispering names no one recognises.</p>
+    <p>Tracing the flicker leads to a world thought extinct: a failed terraforming site long abandoned. But life has returned, in forms no one expected. The planet has healed itself, slowly, stubbornly, beautifully.</p>
+    <p>The mission changes. It is no longer about extraction or settlement, but restoration: helping the refugees rebuild on nature's terms, not their own. And for the pilots assigned to protect them, something begins to shift: they start to see patterns, balance, reciprocity, a different kind of intelligence, older than code, wiser than profit.</p>
+    <div class="ex-note">From the CCP Games application, 2024. Submitted to the candidate bank after the official deadline.</div>
+  </div>
+
+  <h2 class="section-title"><span class="num">5.</span> How it was made</h2>
+
+  <div class="method-steps">
+    <div class="method-step">
+      <div class="ms-num">01</div>
+      <div class="ms-text"><strong>Built from the inside out.</strong> The world of Fulla was not designed against a brief or a theory. It emerged through writing, for children, for a car ride, without an audience in mind. The ecological logic arrived because it felt structurally right, not because it was planned.</div>
+    </div>
+    <div class="method-step">
+      <div class="ms-num">02</div>
+      <div class="ms-text"><strong>Tested against a real brief.</strong> When the CCP Games application appeared, the question was whether the world could survive translation into an entirely different context. The process of answering that question, finding what was structural and what was decorative, is itself the demonstration of narrative design thinking.</div>
+    </div>
+    <div class="method-step">
+      <div class="ms-num">03</div>
+      <div class="ms-text"><strong>AI as research and iteration partner.</strong> ChatGPT was used for visual documentation of the world-building materials and to pressure-test the translation logic. Perplexity was used to identify the theoretical connections after the work was done. The creative decisions, the world's internal logic and the translation choices were mine throughout.</div>
+    </div>
+    <div class="method-step">
+      <div class="ms-num">04</div>
+      <div class="ms-text"><strong>Recognised the pattern after the fact.</strong> The theoretical connections to Simard, Le Guin, Kimmerer and Jenkins were identified through research conducted after the world was built. That they exist is not a claim to academic knowledge. It is evidence that the intuitive approach produces structurally sound results.</div>
+    </div>
+  </div>
+
+  <h2 class="section-title"><span class="num">6.</span> What it shows</h2>
+
+  <p>This sample demonstrates a specific kind of thinking: the ability to build worlds with internal ecological logic, to identify what is structural versus what is contextual in that logic, and to translate the structural core into a new context without losing coherence. It also demonstrates something less common: that this thinking operates intuitively, arriving at conclusions consistent with established theory without working from that theory directly.</p>
+
+  <p>The same world exists in four forms: a children's book, a roleplay concept for a group of friends' children, a ceremonial song in Danish and Icelandic, and a sci-fi game pitch for one of the world's most complex persistent universes. Each version is complete in itself. The logic holds across all of them.</p>
+
+  <div class="closing">
+    <p>This material was produced independently, first for personal reasons, then in response to a professional opportunity. The CCP Games application was submitted to their candidate bank in 2024. The theoretical connections documented here were identified after the work was done, through research conducted during the preparation of this portfolio sample.</p>
+    <p>It is offered as a demonstration of narrative systems thinking, ecological world-building and transmedia translation, and as evidence that intuitive creative work and analytical rigour are not opposites.</p>
+  </div>
+
+  <div class="sources">
+    <div class="s-label">Referenced works</div>
+    <div>Simard, S. et al. (1997). Net transfer of carbon between ectomycorrhizal tree species in the field. <em>Nature</em>, 388, 579–582.</div>
+    <div>Le Guin, U.K. (1986). The Carrier Bag Theory of Fiction. In <em>Dancing at the Edge of the World</em> (1989). Grove Press.</div>
+    <div>Kimmerer, R.W. (2013). <em>Braiding Sweetgrass: Indigenous Wisdom, Scientific Knowledge and the Teachings of Plants</em>. Milkweed Editions.</div>
+    <div>Mateas, M. and Stern, A. (2005). Façade: An Experiment in Building a Fully-Realized Interactive Drama. <em>Game Developers Conference</em>.</div>
+    <div>Jenkins, H. (2006). <em>Convergence Culture: Where Old and New Media Collide</em>. New York University Press.</div>
+  </div>
+
+  <div class="doc-footer">
+    <span>Anne Mette Heltborg Poulsen &nbsp;·&nbsp; amhpjobs@gmail.com</span>
+    <span>Portfolio sample</span>
+  </div>
+</div>
+
+</body>
+</html>

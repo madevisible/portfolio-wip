@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>There Are Only Two Chairs</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; font-size: 11pt; color: #2c2c2c; background: #fff; line-height: 1.7; }
+  .page { max-width: 820px; margin: 0 auto; padding: 60px 64px; }
+
+  /* COVER */
+  .cover { min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 80px 64px; background: #1B3A5C; }
+  .cover-tag { font-family: Arial, sans-serif; font-size: 9pt; color: rgba(255,255,255,0.45); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 80px; }
+  .cover-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .cover-label { font-family: Arial, sans-serif; font-size: 9pt; color: #7EC8C8; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+  .cover-title { font-size: 46pt; font-weight: 700; color: #ffffff; line-height: 1.05; margin-bottom: 24px; }
+  .cover-sub { font-family: Arial, sans-serif; font-size: 12pt; color: rgba(255,255,255,0.65); max-width: 520px; line-height: 1.6; border-left: 3px solid #2A7F7F; padding-left: 20px; margin-bottom: 60px; }
+  .cover-quote { margin-top: 40px; padding: 28px 32px; background: rgba(255,255,255,0.06); border-left: 3px solid #7EC8C8; }
+  .cover-quote p { font-family: Georgia, serif; font-size: 14pt; color: rgba(255,255,255,0.85); font-style: italic; line-height: 1.6; }
+  .cover-quote .attribution { font-family: Arial, sans-serif; font-size: 8.5pt; color: rgba(255,255,255,0.4); margin-top: 10px; font-style: normal; }
+  .cover-footer { margin-top: 48px; font-family: Arial, sans-serif; font-size: 9pt; color: rgba(255,255,255,0.35); display: flex; justify-content: space-between; }
+
+  /* PAGE HEADER */
+  .page-header { font-family: Arial, sans-serif; font-size: 8pt; color: #bbb; letter-spacing: 1px; text-transform: uppercase; padding-bottom: 12px; border-bottom: 1px solid #e8e8e8; margin-bottom: 40px; display: flex; justify-content: space-between; }
+
+  /* ORIGIN NOTE */
+  .origin-note { background: #F4F9F9; border-left: 4px solid #2A7F7F; padding: 28px 32px; margin: 0 0 40px; }
+  .origin-note .on-label { font-family: Arial, sans-serif; font-size: 8.5pt; font-weight: 700; color: #2A7F7F; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+  .origin-note p { font-size: 10.5pt; color: #444; margin-bottom: 10px; }
+  .origin-note p:last-child { margin-bottom: 0; }
+
+  /* HEADINGS */
+  h2.section-title { font-family: Arial, sans-serif; font-size: 12pt; font-weight: 700; color: #1B3A5C; margin: 44px 0 8px; padding-bottom: 8px; border-bottom: 2px solid #2A7F7F; }
+  h2.section-title .num { color: #2A7F7F; margin-right: 8px; }
+  h3.sub-title { font-family: Arial, sans-serif; font-size: 10.5pt; font-weight: 700; color: #1B3A5C; margin: 24px 0 8px; }
+
+  p { margin-bottom: 13px; }
+
+  /* CALLOUTS */
+  .callout { border-left: 4px solid #2A7F7F; background: #EEF6F6; padding: 18px 22px; margin: 22px 0; }
+  .callout.dark { background: #1B3A5C; border-left-color: #7EC8C8; }
+  .callout.warm { background: #FDF8EE; border-left-color: #C0841A; }
+  .callout-label { font-family: Arial, sans-serif; font-size: 8.5pt; font-weight: 700; color: #2A7F7F; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .callout.dark .callout-label { color: #7EC8C8; }
+  .callout.warm .callout-label { color: #C0841A; }
+  .callout p { font-size: 10.5pt; margin: 0; }
+  .callout.dark p { color: rgba(255,255,255,0.85); }
+
+  /* QUOTE PULL */
+  .pull-quote { margin: 32px 0; padding: 24px 32px; border-top: 2px solid #2A7F7F; border-bottom: 2px solid #2A7F7F; }
+  .pull-quote p { font-family: Georgia, serif; font-size: 14pt; font-style: italic; color: #1B3A5C; line-height: 1.6; margin: 0; }
+  .pull-quote .pq-source { font-family: Arial, sans-serif; font-size: 8.5pt; color: #999; margin-top: 10px; font-style: normal; }
+
+  /* STAT BOXES */
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #ddd; margin: 24px 0; border: 1px solid #ddd; overflow: hidden; }
+  .stat-box { background: white; padding: 20px 14px; text-align: center; }
+  .stat-box .sv { font-family: Arial, sans-serif; font-size: 22pt; font-weight: 700; color: #2A7F7F; line-height: 1; }
+  .stat-box .sl { font-family: Arial, sans-serif; font-size: 8.5pt; color: #777; margin-top: 6px; line-height: 1.4; }
+
+  /* MICROCOPY EXAMPLES */
+  .micro-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .micro-box { padding: 18px 20px; border-radius: 2px; }
+  .micro-box.patient { background: #F4F9F9; border-top: 3px solid #2A7F7F; }
+  .micro-box.caregiver { background: #FDF8EE; border-top: 3px solid #C0841A; }
+  .micro-box .mb-label { font-family: Arial, sans-serif; font-size: 8pt; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+  .micro-box.patient .mb-label { color: #2A7F7F; }
+  .micro-box.caregiver .mb-label { color: #C0841A; }
+  .micro-box p { font-size: 10pt; color: #444; margin: 0; line-height: 1.6; }
+  .micro-box .mb-note { font-family: Arial, sans-serif; font-size: 8.5pt; color: #999; margin-top: 10px; font-style: italic; }
+
+  /* VALUE PATHS */
+  .value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+  .value-box { padding: 20px; background: #F4F9F9; border-top: 3px solid #1B3A5C; }
+  .value-box h4 { font-family: Arial, sans-serif; font-size: 10pt; font-weight: 700; color: #1B3A5C; margin-bottom: 8px; }
+  .value-box p { font-size: 9.5pt; color: #555; margin: 0; line-height: 1.55; }
+  .value-box .vb-tag { font-family: Arial, sans-serif; font-size: 8pt; color: #2A7F7F; font-weight: 700; margin-top: 10px; letter-spacing: 0.5px; }
+
+  /* CHAIRS VISUAL */
+  .chairs-visual { display: flex; gap: 0; margin: 28px 0; }
+  .chair-slot { flex: 1; padding: 24px 20px; text-align: center; }
+  .chair-slot.existing { background: #1B3A5C; }
+  .chair-slot.proposed { background: #2A7F7F; }
+  .chair-slot.empty { background: #f0f0f0; border: 2px dashed #ccc; }
+  .chair-slot .cs-icon { font-size: 28pt; margin-bottom: 10px; }
+  .chair-slot .cs-label { font-family: Arial, sans-serif; font-size: 9pt; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 1px; }
+  .chair-slot.empty .cs-label { color: #aaa; }
+  .chair-slot .cs-desc { font-family: Arial, sans-serif; font-size: 8.5pt; color: rgba(255,255,255,0.7); margin-top: 6px; line-height: 1.4; }
+  .chair-slot.empty .cs-desc { color: #bbb; }
+
+  /* THREAD LINE */
+  .thread { display: flex; align-items: stretch; gap: 0; margin: 28px 0; }
+  .thread-item { flex: 1; padding: 16px 18px; background: #F4F9F9; border-left: 3px solid #2A7F7F; position: relative; }
+  .thread-item:not(:last-child)::after { content: '→'; position: absolute; right: -14px; top: 50%; transform: translateY(-50%); font-family: Arial; font-size: 14pt; color: #2A7F7F; z-index: 1; background: white; padding: 0 2px; }
+  .thread-item .ti-label { font-family: Arial, sans-serif; font-size: 8pt; font-weight: 700; color: #2A7F7F; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+  .thread-item p { font-size: 9.5pt; color: #555; margin: 0; line-height: 1.4; }
+
+  /* NOTE BOX */
+  .note-box { background: #f7f7f7; border: 1px solid #ddd; padding: 13px 18px; margin: 14px 0; font-size: 9.5pt; color: #666; font-style: italic; line-height: 1.6; }
+
+  /* CLOSING */
+  .closing { margin-top: 32px; padding: 24px 28px; background: #F4F9F9; border-left: 4px solid #1B3A5C; }
+  .closing p { font-size: 10.5pt; color: #444; margin-bottom: 10px; }
+  .closing p:last-child { margin: 0; font-style: italic; color: #777; font-size: 9.5pt; }
+
+  ul.rlist { margin: 10px 0 16px 20px; }
+  ul.rlist li { margin-bottom: 7px; font-size: 10.5pt; }
+
+  .doc-footer { margin-top: 40px; padding-top: 12px; border-top: 1px solid #eee; font-family: Arial, sans-serif; font-size: 8pt; color: #bbb; display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Concept &nbsp;·&nbsp; Product Thinking &nbsp;·&nbsp; Portfolio Sample &nbsp;·&nbsp; 2024</div>
+  <div class="cover-main">
+    <div class="cover-label">Informal Care &nbsp;·&nbsp; Digital Therapeutics &nbsp;·&nbsp; UX Writing</div>
+    <div class="cover-title">There Are Only<br>Two Chairs</div>
+    <div class="cover-sub">A concept for extending digital therapeutics to the people who hold daily life together when illness disrupts it</div>
+    <div class="cover-quote">
+      <p>"There are only two chairs in the room. One for me and one for your dad."</p>
+      <div class="attribution">From an interview conducted as part of my Master's thesis, University of Copenhagen, 2016. The speaker is a daughter whose mother had breast cancer.</div>
+    </div>
+  </div>
+  <div class="cover-footer">
+    <span>Anne Mette Heltborg Poulsen &nbsp;·&nbsp; amhpjobs@gmail.com</span>
+    <span>Company anonymised</span>
+  </div>
+</div>
+
+<!-- ORIGIN -->
+<div class="page">
+  <div class="page-header"><span>There Are Only Two Chairs</span><span>Where This Came From</span></div>
+
+  <div class="origin-note">
+    <div class="on-label">Where this came from</div>
+    <p>In 2016, I interviewed relatives of cancer patients for my Master's thesis in Psychology of Language at the University of Copenhagen. I was studying how institutional communication shapes the experience of people navigating the healthcare system under pressure. What I found was something the research had not quite prepared me for.</p>
+    <p>The patients had chairs. The professionals had chairs. The relatives were standing in the hallway, holding things together, making decisions without information, absorbing the weight of a situation that had no formal place for them.</p>
+    <p>I work at the intersection of language, communication design and human experience. My instinct is to notice where systems fail the people trying to navigate them, and to ask what a better design would look like. When I encountered digital therapeutics platforms, I noticed the same pattern from my thesis: the patient was supported, the caregiver was invisible. The person quietly managing the medication schedule, translating medical language, holding up hope: still standing in the hallway.</p>
+    <p>This concept is my attempt to think through what it would mean to offer them a chair. It is not a product specification. It is a design argument, grounded in research and written from the perspective of someone who thinks about how communication either reaches people or fails them.</p>
+  </div>
+
+  <div class="thread">
+    <div class="thread-item">
+      <div class="ti-label">Academic root</div>
+      <p>MA thesis on how institutional communication shapes trust and understanding for relatives in the Danish healthcare system (2016)</p>
+    </div>
+    <div class="thread-item">
+      <div class="ti-label">Personal experience</div>
+      <p>Both the research and lived experience of navigating healthcare as a relative, not a patient</p>
+    </div>
+    <div class="thread-item">
+      <div class="ti-label">Product observation</div>
+      <p>Digital therapeutics are designed for patients. The informal caregiver remains systematically outside the design</p>
+    </div>
+    <div class="thread-item">
+      <div class="ti-label">This concept</div>
+      <p>What would it take to extend an existing platform to include the person in the other chair?</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-bottom:8px;">
+    <div class="callout-label">What this concept shows about how I work</div>
+    <p>The academic root is a Master's thesis on institutional communication and healthcare. The personal root is experience as a relative navigating a system that had no place for me. The analytical root is a conviction that the gap between clinical care and lived experience is almost always a communication and design problem, not a knowledge problem. This concept starts from a human observation, traces it to a structural gap, builds an argument across stakeholder perspectives, and writes content that sounds like something a person would actually say to another person. Cancer care is the entry point because it is where my expertise is strongest. The logic applies wherever a patient has someone beside them doing invisible, unsupported work.</p>
+  </div>
+
+  <h2 class="section-title">The problem this addresses</h2>
+
+  <p>Digital therapeutics have made real progress in supporting patients through complex, chronic illness. The best platforms offer guidance, motivation, education and behavioral support that genuinely changes daily life. That is not in question.</p>
+
+  <p>What is in question is the frame. A patient does not navigate illness alone. Behind most patients is at least one informal caregiver: a partner, a parent, a sibling, an adult child. Someone who has not been trained for this role, has not been briefed, and has no formal place in the system. Yet they are often the ones keeping treatment on track, translating medical language, managing logistics, and holding up the emotional weight of a situation that has no clear end.</p>
+
+  <div class="pull-quote">
+    <p>Becoming an informal caregiver often feels like starting a new job overnight. Without a welcome, a briefing, or a first-day introduction. Suddenly you are responsible for tasks you never trained for: translating medical terms, keeping routines steady, holding up hope.</p>
+  </div>
+
+  <p>The current model asks them to do all of this without support, without information structured for their needs, and without acknowledgment that their role exists at all. The downstream consequences are well documented.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="sv">100M</div><div class="sl">informal caregivers in Europe. One in five adults provides informal care, often without structured support from the system</div></div>
+    <div class="stat-box"><div class="sv">34%</div><div class="sl">of informal caregivers in Iceland experience significant caregiver distress, one of the highest rates in a six-country European comparison</div></div>
+    <div class="stat-box"><div class="sv">3.5%</div><div class="sl">of EU GDP. The estimated value of informal care across Europe, and rising as populations age</div></div>
+  </div>
+
+  <div class="note-box">Sources: Eurocarers 2023, WHO 2021, OECD 2019; caregiver distress figure: Scandinavian Journal of Caring Sciences (2025), six-country study including Iceland, data from Landspítali / National University Hospital Reykjavík; GDP figure: Swedish informal caregiver study, PMC 2025</div>
+
+  <p>Prolonged informal care strains caregivers' own health to the point where they become patients themselves. Icelandic research shows this pattern clearly: caregiver distress in Iceland has risen sharply, reaching 34% in recent data, among the highest recorded in comparable European countries. A support person becomes a system cost. The person who was holding things together is now the one who needs holding.</p>
+
+  <div class="callout dark">
+    <div class="callout-label">The structural gap</div>
+    <p>Most digital health platforms are designed around a single user: the patient. The informal caregiver remains outside the design. Not because they are unimportant, but because no one has built the chair for them yet.</p>
+  </div>
+</div>
+
+<!-- THE CONCEPT -->
+<div class="page">
+  <div class="page-header"><span>There Are Only Two Chairs</span><span>The Concept</span></div>
+
+  <h2 class="section-title"><span class="num">2.</span> The concept: an Informal Caregiver Module</h2>
+
+  <p>An Informal Caregiver Module (ICM) would not replace what a digital therapeutics platform already does well. It would extend it. Not by rebuilding the architecture, but by recognising that the patient exists in a relational context, and that context shapes outcomes.</p>
+
+  <p>The entry point is onboarding. When a patient joins a platform, there is usually a caregiving person somewhere nearby. That moment of entry, when both patient and caregiver are most open, most overwhelmed, and most in need of orientation, is exactly when a second track could make the greatest difference.</p>
+
+  <div class="chairs-visual">
+    <div class="chair-slot existing">
+      <div class="cs-icon">🪑</div>
+      <div class="cs-label">The patient</div>
+      <div class="cs-desc">Already supported by the platform: guidance, education, reminders, behavioral nudges</div>
+    </div>
+    <div class="chair-slot proposed">
+      <div class="cs-icon">🪑</div>
+      <div class="cs-label">The caregiver</div>
+      <div class="cs-desc">A parallel track: oriented, informed, nudged, seen. The third chair the platform could offer.</div>
+    </div>
+    <div class="chair-slot empty">
+      <div class="cs-icon">
+        <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <!-- Chair seat -->
+          <rect x="8" y="18" width="32" height="6" rx="2" fill="#bbb"/>
+          <!-- Chair back -->
+          <rect x="10" y="6" width="28" height="14" rx="2" fill="#bbb"/>
+          <!-- Left front leg -->
+          <rect x="10" y="24" width="4" height="16" rx="1.5" fill="#bbb"/>
+          <!-- Right front leg -->
+          <rect x="34" y="24" width="4" height="16" rx="1.5" fill="#bbb"/>
+          <!-- Left back leg -->
+          <rect x="10" y="6" width="4" height="34" rx="1.5" fill="#bbb"/>
+          <!-- Right back leg -->
+          <rect x="34" y="6" width="4" height="34" rx="1.5" fill="#bbb"/>
+          <!-- Cross: two diagonal lines -->
+          <line x1="4" y1="4" x2="44" y2="44" stroke="#C0392B" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="44" y1="4" x2="4" y2="44" stroke="#C0392B" stroke-width="3.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="cs-label">Current reality</div>
+      <div class="cs-desc">The caregiver has no seat. They navigate alongside the patient without structure or support.</div>
+    </div>
+  </div>
+
+  <p>Onboarding for a caregiver would not be a simplified version of the patient experience. It would be designed around their specific situation: the sudden responsibility, the unfamiliar language, the need to understand without intruding, and the importance of knowing when to step back.</p>
+
+  <div class="callout warm">
+    <div class="callout-label">The onboarding principle</div>
+    <p>Not a welcome screen. An orientation. Normalize what the role involves. Explain the language they will encounter. Clarify what support looks like. And signal, early, that their presence matters and their limits are real.</p>
+  </div>
+
+  <h3 class="sub-title">What makes this lightweight and scalable</h3>
+  <ul class="rlist">
+    <li>Built on existing platform architecture: content modules, reminders, nudges. No new infrastructure required.</li>
+    <li>Caregiver track runs in parallel, not in conflict, with the patient experience</li>
+    <li>Opt-in by design: the caregiver is invited, not enrolled. The patient controls the invitation.</li>
+    <li>Content is modular: condition-specific layers can be added without rebuilding the core</li>
+  </ul>
+</div>
+
+<!-- MICROCOPY -->
+<div class="page">
+  <div class="page-header"><span>There Are Only Two Chairs</span><span>What It Sounds Like</span></div>
+
+  <h2 class="section-title"><span class="num">3.</span> What it sounds like: microcopy in practice</h2>
+
+  <p>The difference between a platform that sees caregivers and one that ignores them is often not structural. It is tonal. It is a single notification that acknowledges the person reading it. A reminder that does not add pressure. A nudge that says: we know you are here too.</p>
+
+  <p>These examples illustrate how existing platform features could be extended with a caregiver-parallel voice. The patient content is unchanged. The caregiver content adds a second perspective on the same moment.</p>
+
+  <h3 class="sub-title">Medication reminder</h3>
+  <div class="micro-pair">
+    <div class="micro-box patient">
+      <div class="mb-label">Patient</div>
+      <p>It's time for your evening dose.</p>
+    </div>
+    <div class="micro-box caregiver">
+      <div class="mb-label">Caregiver</div>
+      <p>It's time for Michael's evening dose. It's okay to give him a gentle nudge if he forgets. Don't worry. His app will remind him too. Whatever help you give is enough. You're doing great.</p>
+      <div class="mb-note">Supports adherence without adding pressure. Signals that the caregiver's presence is valued, not just useful.</div>
+    </div>
+  </div>
+
+  <h3 class="sub-title">Rest and wellbeing nudge</h3>
+  <div class="micro-pair">
+    <div class="micro-box patient">
+      <div class="mb-label">Patient</div>
+      <p>Taking a short break helps recharge your energy. Even five minutes can make a difference.</p>
+    </div>
+    <div class="micro-box caregiver">
+      <div class="mb-label">Caregiver</div>
+      <p>Low on energy? Resting helps both of you, so why not do it together? Try: "Wanna take a breather? I sure could use one. Come sit with me."</p>
+      <div class="mb-note">Turns rest into a shared moment rather than a symptom to manage. Reduces caregiver isolation while supporting patient recovery.</div>
+    </div>
+  </div>
+
+  <h3 class="sub-title">Appointment reminder</h3>
+  <div class="micro-pair">
+    <div class="micro-box patient">
+      <div class="mb-label">Patient</div>
+      <p>Tomorrow at 14:00: oncology appointment. Want to share this with Susan so you're aligned?</p>
+    </div>
+    <div class="micro-box caregiver">
+      <div class="mb-label">Caregiver</div>
+      <p>Michael has an oncology appointment tomorrow at 14:00. Good to plan transport together. You don't have to go in. Being there is already a lot.</p>
+      <div class="mb-note">Reduces no-shows. Acknowledges the caregiver's logistics role without prescribing how deeply they should be involved.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">The writing principle behind these examples</div>
+    <p>None of these messages add a new task. They acknowledge the person who is already doing the work. The language is warm, specific and non-prescriptive. It says "we see you" rather than "here is another responsibility." That distinction is the difference between a platform that supports caregivers and one that merely addresses them.</p>
+  </div>
+</div>
+
+<!-- VALUE PATHS -->
+<div class="page">
+  <div class="page-header"><span>There Are Only Two Chairs</span><span>Why It Makes Sense</span></div>
+
+  <h2 class="section-title"><span class="num">4.</span> Why this makes sense beyond the human case</h2>
+
+  <p>The human argument for supporting informal caregivers is clear. But an Informal Caregiver Module also creates value across the stakeholder landscape that digital therapeutics platforms serve.</p>
+
+  <div class="value-grid">
+    <div class="value-box">
+      <h4>Stronger adherence data</h4>
+      <p>When caregivers are equipped to support treatment routines without pressure or confusion, adherence improves. That data matters to pharma partners who need real-world evidence of treatment engagement.</p>
+      <div class="vb-tag">Relevant for: pharma partnerships</div>
+    </div>
+    <div class="value-box">
+      <h4>Better clinical outcomes</h4>
+      <p>Caregivers who are supported rather than strained stand stronger in their role. Stronger caregiver contribution means more consistent treatment adherence and better patient outcomes, strengthening the evidence packages payers require.</p>
+      <div class="vb-tag">Relevant for: payer partnerships</div>
+    </div>
+    <div class="value-box">
+      <h4>Cost avoidance</h4>
+      <p>Early caregiver support can prevent the caregiver from becoming a patient. Fewer missed appointments, less crisis care, and more stable treatment pathways reduce system costs in ways that are both measurable and attributable.</p>
+      <div class="vb-tag">Relevant for: health system partners</div>
+    </div>
+    <div class="value-box">
+      <h4>Employer relevance</h4>
+      <p>Not all caregivers enter through the patient pathway. Some only become visible when their strain shows up at work. A workplace-licensed version of the module would open a new B2B channel while serving the same population.</p>
+      <div class="vb-tag">Relevant for: employer and B2B markets</div>
+    </div>
+  </div>
+
+  <div class="callout dark">
+    <div class="callout-label">The strategic case in one sentence</div>
+    <p>An Informal Caregiver Module extends a platform's holistic vision of health into the relational reality where most health outcomes are actually shaped, while creating measurable value across pharma, payer, system and employer stakeholders.</p>
+  </div>
+
+  <div class="closing">
+    <p>A platform that sees only the patient sees only part of the picture. The informal caregiver is already in the room. This concept is about making sure there is a chair for them when they arrive.</p>
+    <p>This concept was developed independently, drawing on academic research, personal experience and direct observation. It is offered here as a sample of product thinking, content strategy and UX writing in combination, produced without commission and without the organisation's knowledge.</p>
+  </div>
+
+  <div class="doc-footer">
+    <span>Anne Mette Heltborg Poulsen &nbsp;·&nbsp; amhpjobs@gmail.com</span>
+    <span>Portfolio sample, company anonymised</span>
+  </div>
+</div>
+
+</body>
+</html>
